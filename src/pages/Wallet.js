@@ -11,8 +11,8 @@ class Wallet extends React.Component {
         <header>
           <h1>TrybeWallet</h1>
           <h2 data-testid="email-field">{`Email: ${getEmail}`}</h2>
-          <h3 data-testid="total-field">Despesa Total:</h3>
-          <span data-testid="header-currency-field" />
+          <h3 data-testid="total-field">Despesa Total: 0</h3>
+          <span />
           Moeda:&nbsp;
           <select data-testid="header-currency-field">
             <option>BRL</option>
@@ -32,6 +32,7 @@ Wallet.propTypes = {
 
 const mapStateToProps = (state) => ({
   getEmail: state.user.email,
+  // getTotalExpenses: state.wallet.totalExpenses,
 });
 
 export default connect(mapStateToProps)(Wallet);

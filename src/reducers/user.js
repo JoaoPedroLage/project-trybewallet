@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   wallet: {
     currencies: [],
     expenses: [],
+    totalExpenses: 0,
   },
 };
 
