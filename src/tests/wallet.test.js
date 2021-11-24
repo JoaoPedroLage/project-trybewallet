@@ -49,7 +49,7 @@ describe('3 - Crie um header para a página de carteira contendo as seguintes ca
     expect(emailField).toContainHTML(store.getState().user.email);
   });
 
-  test('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
+  test.only('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
     renderWithRouterAndStore(<Wallet />, '/carteira', initial);
     const totalField = screen.getByTestId(TOTAL_FIELD_TEST_ID);
 

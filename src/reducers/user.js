@@ -4,7 +4,14 @@
 import { INPUT_EMAIL } from '../actions';
 
 const INITIAL_STATE = {
-  email: '',
+  user: {
+    email: '',
+  },
+  wallet: {
+    currencies: [],
+    expenses: [],
+    totalExpenses: 0,
+  },
 };
 
 const emailReducer = (state = INITIAL_STATE, action) => {
