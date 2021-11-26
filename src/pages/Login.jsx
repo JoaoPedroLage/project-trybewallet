@@ -20,12 +20,18 @@ class Login extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkCorrectLogin = this.checkCorrectLogin.bind(this);
   }
 
   handleChange({ target }) {
-    this.setState({ [target.name]: target.value });
+    this.setState({ [target.name]: target.value },
+      () => this.checkCorrectLogin());
+  }
+
+  checkCorrectLogin() {
     const { email, password } = this.state;
-    const minLengthPassword = 5;
+    const minLengthPassword = 6;
+
     if (regexEmailValidation.test(email)
      && password.length >= minLengthPassword) {
       this.setState({

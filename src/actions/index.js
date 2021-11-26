@@ -1,14 +1,14 @@
 export const INPUT_EMAIL = 'INPUT_EMAIL';
-export const DATA_WALLET = 'DATA_WALLET';
 export const RECEIVE_DATA = 'RECEIVE_DATA';
+export const EXPENSES_DATA = 'EXPENSES_DATA';
 
 export const inputEmail = (payload) => ({
   type: INPUT_EMAIL,
   payload,
 });
 
-export const dataWallet = (payload) => ({
-  type: DATA_WALLET,
+export const expensesData = (payload) => ({
+  type: EXPENSES_DATA,
   payload,
 });
 
