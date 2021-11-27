@@ -12,7 +12,7 @@ export const expensesData = (payload) => ({
   payload,
 });
 
-export const receiveData = (payload) => ({
+export const receiveDataAPI = (payload) => ({
   type: RECEIVE_DATA,
   payload,
 });
@@ -20,5 +20,5 @@ export const receiveData = (payload) => ({
 export const requestAPI = () => async (dispatch) => {
   const response = await fetch('https://economia.awesomeapi.com.br/json/all');
   const data = await response.json();
-  return dispatch(receiveData(data));
+  return dispatch(receiveDataAPI(data));
 };

@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import ExpensesForm from './ValueForm';
+import WalletHeader from '../WalletHeader';
+import ValueForm from './ValueForm';
 import CurrenciesForm from './CurrenciesForm';
 import MethodForm from './MethodForm';
 import TagForm from './TagForm';
@@ -9,14 +10,16 @@ import DescriptionForm from './DescriptionForm';
 import { expensesData, requestAPI } from '../../actions';
 
 let createIdNumber = 0;
+const totalExpenseArray = [0];
 
 const initialState = {
   currency: 'USD',
   description: '',
   method: '',
-  id: '0',
+  id: 0,
   tag: '',
   value: '',
+  totalExpenses: 0,
 };
 
 class WalletForm extends React.Component {
@@ -52,19 +55,24 @@ class WalletForm extends React.Component {
 
   handleSubimit(e) {
     e.preventDefault();
+    const { currency, description, method, id, exchangeRates, tag, value } = this.state;
     const { getExpenses } = this.props;
-    getExpenses(this.state);
+    getExpenses({ currency, description, method, id, exchangeRates, tag, value });
     this.setState({
       ...initialState,
       id: createIdNumber });
     createIdNumber += 1;
+    totalExpenseArray.push(Number(value));
+    const getSum = (result, number) => result + number;
+    this.setState({ totalExpense: totalExpenseArray.reduce(getSum) });
   }
 
   render() {
     // const { disabled } = this.state;
     return (
       <form onSubmit={ this.handleSubimit }>
-        <ExpensesForm { ...this.state } handleChange={ this.handleChange } />
+        <WalletHeader { ...this.state } />
+        <ValueForm { ...this.state } handleChange={ this.handleChange } />
         <CurrenciesForm { ...this.state } handleChange={ this.handleChange } />
         <MethodForm { ...this.state } handleChange={ this.handleChange } />
         <TagForm { ...this.state } handleChange={ this.handleChange } />
@@ -81,7 +89,7 @@ class WalletForm extends React.Component {
 }
 
 WalletForm.propTypes = {
-  getExpenses: PropTypes.func.isRequired,
+  getExpenses: PropTypes.func,
   getResponseAPI: PropTypes.func,
 }.isRequired;
 

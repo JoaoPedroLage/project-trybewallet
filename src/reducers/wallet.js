@@ -14,7 +14,7 @@ const walletReducer = (state = INITIAL_STATE, action) => {
     };
   case EXPENSES_DATA:
     return {
-      ...state, expenses: action.payload,
+      ...state, expenses: [...state.expenses, action.payload],
     };
   default: return state;
   }
