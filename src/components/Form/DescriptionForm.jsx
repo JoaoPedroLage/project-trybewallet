@@ -9,8 +9,8 @@ export default class DescriptionForm extends Component {
           &nbsp;Descrição:&nbsp;
         <input
           data-testid="description-input"
-          value={ description }
           name="description"
+          value={ description }
           onChange={ handleChange }
         />
       </label>

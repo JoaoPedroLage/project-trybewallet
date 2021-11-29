@@ -11,10 +11,11 @@ export default class TagForm extends Component {
         </span>
         <select
           data-testid="tag-input"
-          value={ tag }
           name="tag"
+          value={ tag }
           onChange={ handleChange }
         >
+          {/* <option defaultValue>Selecione a tag:</option> */}
           <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
           <option value="Trabalho">Trabalho</option>

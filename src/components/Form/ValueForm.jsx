@@ -10,8 +10,8 @@ export default class ValueForm extends React.Component {
         <input
           data-testid="value-input"
           type="number"
-          value={ value }
           name="value"
+          value={ value }
           onChange={ handleChange }
         />
       </label>

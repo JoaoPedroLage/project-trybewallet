@@ -11,10 +11,11 @@ export default class MethodForm extends Component {
         </span>
         <select
           data-testid="method-input"
-          value={ method }
           name="method"
+          value={ method }
           onChange={ handleChange }
         >
+          {/* <option defaultValue>Selecione o método de pagamento:</option> */}
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
           <option value="Cartão de débito">Cartão de débito</option>

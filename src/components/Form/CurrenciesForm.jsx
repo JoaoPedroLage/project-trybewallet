@@ -12,19 +12,19 @@ class CurrenciesForm extends Component {
   render() {
     const { currency, handleChange, currencies: { USDT, ...rest } } = this.props;
     return (
-      <>
-        <span>
-          &nbsp;Moeda&nbsp;
-        </span>
+      <label htmlFor="currency">
+        Moeda
         <select
+          id="currency"
           data-testid="currency-input"
-          value={ currency }
           name="currency"
+          value={ currency }
           onChange={ handleChange }
         >
-          {/* <option disabled defaultValue>Selecione a moeda de cambio: </option> */}
+          {/* <option defaultValue>Selecione o câmbio da moeda:</option> */}
           { Object.keys(rest).map((cur, index) => (
             <option
+              data-testid={ cur }
               key={ cur }
               id={ index }
               value={ cur }
@@ -34,7 +34,7 @@ class CurrenciesForm extends Component {
             </option>
           )) }
         </select>
-      </>
+      </label>
     );
   }
 }

@@ -13,7 +13,7 @@ let createIdNumber = 0;
 const totalExpenseArray = [0];
 
 const initialState = {
-  currency: 'USD',
+  currency: '',
   description: '',
   method: '',
   id: 0,
