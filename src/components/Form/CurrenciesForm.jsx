@@ -22,6 +22,7 @@ class CurrenciesForm extends Component {
           name="currency"
           onChange={ handleChange }
         >
+          {/* <option disabled defaultValue>Selecione a moeda de cambio: </option> */}
           { Object.keys(rest).map((cur, index) => (
             <option
               key={ cur }

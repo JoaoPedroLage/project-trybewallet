@@ -35,11 +35,6 @@ class WalletForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  async componentDidMount() {
-    const { getResponseAPI } = this.props;
-    await getResponseAPI();
-  }
-
   handleChange({ target }) {
     this.setState({ [target.name]: target.value });
     // () => this.checkInputValue());
@@ -53,18 +48,21 @@ class WalletForm extends React.Component {
   //   else this.setState({ disabled: true });
   // }
 
-  handleSubimit(e) {
+  async handleSubimit(e) {
     e.preventDefault();
     const { currency, description, method, id, exchangeRates, tag, value } = this.state;
-    const { getExpenses } = this.props;
-    getExpenses({ currency, description, method, id, exchangeRates, tag, value });
+    const { getExpenses, getResponseAPI } = this.props;
+    createIdNumber += 1; // aumenta o id em 1 a cada submissão do formulário
+    await getResponseAPI(); // chama a função que a requisição da API
+    getExpenses({ currency, description, method, id, exchangeRates, tag, value }); // envia para a action esses dados do estado
     this.setState({
       ...initialState,
       id: createIdNumber });
-    createIdNumber += 1;
-    totalExpenseArray.push(Number(value));
-    const getSum = (result, number) => result + number;
-    this.setState({ totalExpense: totalExpenseArray.reduce(getSum) });
+    const exchange = Object.values(exchangeRates)
+      .find((cur) => cur.code === currency).ask; // encontra o câmbio da moeda
+    totalExpenseArray.push(Number(value * exchange)); // faz a conversão do câmbio da moeda
+    const getSum = (result, number) => result + number; // soma o resultado atual com a antiga posição
+    this.setState({ totalExpense: totalExpenseArray.reduce(getSum) }); // seta no estado da aplicação o total da soma das despesas
   }
 
   render() {
