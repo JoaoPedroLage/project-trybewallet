@@ -12,6 +12,18 @@ code {
     monospace;
 }
 
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: solid black 1px;
+  width: 100%;
+  }
+
+th {
+  border: solid black 1px;
+  width: 10%;
+}
+
 #login {
   display: flex;
   flex-direction: column;
