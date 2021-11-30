@@ -1,11 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { expensesData } from '../actions';
 
 class ExpensesTable extends Component {
   render() {
+    const { expenses } = this.props;
     return (
-      <table role="grid">
+      <table>
         <thead>
           <tr>
             <th role="columnheader">Descrição</th>
@@ -19,12 +21,44 @@ class ExpensesTable extends Component {
             <th role="columnheader">Editar/Excluir</th>
           </tr>
         </thead>
+        {expenses.length > 0 && (
+          <tbody>
+            {expenses.map((expense, index) => {
+              const exchange = Object.values(expense.exchangeRates)
+                .find((cur) => cur.code === expense.currency);
+              return (
+                <tr key={ index }>
+                  <td>{expense.description}</td>
+                  <td>{expense.tag}</td>
+                  <td>{expense.method}</td>
+                  <td>{expense.value}</td>
+                  <td>{exchange.name.split('/')[0]}</td>
+                  <td>{(exchange.ask * 1).toFixed(2)}</td>
+                  <td>{(expense.value * exchange.ask).toFixed(2)}</td>
+                  <td>Real</td>
+                  <td>
+                    <button type="button">
+                      Editar
+                    </button>
+                    <button type="button">
+                      Excluir
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>)}
       </table>
     );
   }
 }
+
+ExpensesTable.propTypes = {
+  expenses: PropTypes.array,
+}.isRequerid;
+
 const mapStateToProps = (state) => ({
-  currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
